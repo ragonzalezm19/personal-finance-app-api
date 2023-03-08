@@ -10,6 +10,6 @@ app.get('/ping', (_req, res) => {
   res.send('pong')
 })
 
-app.listen(PORT , () => {
+app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
