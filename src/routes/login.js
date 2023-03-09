@@ -5,7 +5,7 @@ const router = express.Router()
 
 router.post('/', (req, res) => {
   // console.log({ env: process.env })
-  // const { email, password } = req.body
+  const { email, password } = req.body
 
   // TODO: create method to validate credentials
   // const token = jwt.sign(
@@ -16,9 +16,9 @@ router.post('/', (req, res) => {
   //   }
   // )
 
-  // res.json({ email, token })
   console.log('login post')
-  res.json({ message: 'login post' })
+  // res.json({ message: 'login post' })
+  res.json({ email, password })
 })
 
 router.get('/', (req, res) => {
