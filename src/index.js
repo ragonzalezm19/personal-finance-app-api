@@ -5,7 +5,7 @@ const loginRoutes = require('./routes/login')
 
 const app = express()
 app.use(express.json())
-app.use('/login', loginRoutes)
+app.use('/test', loginRoutes)
 // app.use('/test', testRoutes)
 
 const PORT = process.env.PORT || 3000
