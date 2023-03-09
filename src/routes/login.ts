@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken'
 const router = express.Router()
 
 router.post('/', (req, res) => {
+  console.log({ env: process.env })
   const { email, password } = req.body
   const secret: jwt.Secret = process.env.SECRET ?? ''
 
