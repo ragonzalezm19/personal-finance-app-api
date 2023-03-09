@@ -1,17 +1,16 @@
-import express from 'express'
-import jwt from 'jsonwebtoken'
+const express = require('express')
+const jwt = require('jsonwebtoken')
 
 const router = express.Router()
 
 router.post('/', (req, res) => {
   console.log({ env: process.env })
   const { email, password } = req.body
-  const secret: jwt.Secret = process.env.SECRET ?? ''
 
   // TODO: create method to validate credentials
   const token = jwt.sign(
     { email, password },
-    secret,
+    process.env.SECRET,
     {
       expiresIn: '1m'
     }
@@ -20,4 +19,4 @@ router.post('/', (req, res) => {
   res.json({ email, token })
 })
 
-export default router
+module.exports = router
