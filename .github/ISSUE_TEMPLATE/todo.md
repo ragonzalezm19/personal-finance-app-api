@@ -1,5 +1,5 @@
 ---
-name: TODO 📝
+name: 📝 TODO
 about: Adding some task to do
 title: 'TODO: '
 labels: todo
