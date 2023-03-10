@@ -1,7 +1,7 @@
 ---
-name: 📝 TODO
+name: 📝 ToDo
 about: Adding some task to do
-title: 'TODO: '
+title: '📝 [ToDo]: '
 labels: todo
 assignees: 'ragonzalezm19'
 ---
