@@ -3,7 +3,7 @@ const { validateToken } = require('./middlewares/jwt')
 
 const router = express.Router()
 
-router.get('/', validateToken, (req, res) => {
+router.get('/jwt', validateToken, (req, res) => {
   res.json({ test: 'test' })
 })
 
