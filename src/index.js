@@ -1,15 +1,20 @@
-const { config } = require('./config')
+require('dotenv').config()
+require('./mongo')
+
 const express = require('express')
-const bodyParser = require('body-parser')
 const loginRoutes = require('./routes/login')
 const testRoutes = require('./routes/test')
+const signupRoutes = require('./routes/signup')
 
 const app = express()
 
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+const { PORT } = process.env
+
+app.use(express.urlencoded({ extended: false }))
+app.use(express.json())
 
 // Routes
+app.use('/signup', signupRoutes)
 app.use('/login', loginRoutes)
 app.use('/test', testRoutes)
 
@@ -19,6 +24,6 @@ app.get('/ping', (req, res) => {
   res.json({ message: 'pong' })
 })
 
-app.listen(config.PORT, () => {
-  console.log(`Server running on port ${config.PORT}`)
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`)
 })
