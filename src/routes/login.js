@@ -5,35 +5,39 @@ const User = require('./../models/User')
 
 const router = express.Router()
 
-router.post('/', async (req, res) => {
-  const { email, password } = req.body
-  const { SECRET } = process.env
+router.post('/', async (req, res, next) => {
+  try {
+    const { email, password } = req.body
+    const { SECRET } = process.env
 
-  const user = await User.findOne({ email })
+    const user = await User.findOne({ email })
 
-  if (user === null) res.status(401).json({ error: { message: 'wrong email or password' } })
+    if (user === null) res.status(401).json({ error: { message: 'wrong email or password' } })
 
-  const passwordIsCorrect = await bcrypt.compare(password, user.password)
+    const passwordIsCorrect = await bcrypt.compare(password, user.password)
 
-  if (!passwordIsCorrect) res.status(401).json({ error: { message: 'wrong email or password' } })
+    if (!passwordIsCorrect) res.status(401).json({ error: { message: 'wrong email or password' } })
 
-  const userWithoutPassword = {
-    id: user._id,
-    name: user.name,
-    email: user.email
-  }
-
-  const token = jwt.sign(
-    userWithoutPassword,
-    SECRET,
-    {
-      expiresIn: '1m'
+    const userWithoutPassword = {
+      id: user._id,
+      name: user.name,
+      email: user.email
     }
-  )
 
-  userWithoutPassword.token = token
+    const token = jwt.sign(
+      userWithoutPassword,
+      SECRET,
+      {
+        expiresIn: '1d'
+      }
+    )
 
-  res.status(200).json(userWithoutPassword)
+    userWithoutPassword.token = token
+
+    res.status(200).json(userWithoutPassword)
+  } catch (error) {
+    next(error)
+  }
 })
 
 module.exports = router
